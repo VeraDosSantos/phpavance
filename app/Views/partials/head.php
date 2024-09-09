@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link active" href="/app/Views/get.view.php">Le GET</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/app/Views/formulaire.view.php">Le formulaire</a>
+        </li>
       </ul>
     </div>
   </div>
