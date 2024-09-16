@@ -29,6 +29,9 @@
         <li class="nav-item">
           <a class="nav-link active" href="/app/Views/formulaire.view.php">Le formulaire</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/app/Controllers/PdoController.php">PDO</a>
+        </li>
       </ul>
     </div>
   </div>
