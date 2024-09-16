@@ -6,10 +6,11 @@
 
 <p><?= $retour ?></p>
 
-<?php var_dump($employe); ?>
+<?php //var_dump($employe); ?>
 <p>Prénom : <?= $employe['prenom'] ?></p>
 
-<?php var_dump($mesDonnees); ?>
+<?php //var_dump($mesDonnees); ?>
+<?php var_dump($donnees); ?>
 
 <?php 
     foreach($mesDonnees as $employe){
@@ -18,6 +19,9 @@
         <?php
     }
 ?>
+
+
+
 <?php
     include '../Views/partials/footer.php';
 ?>

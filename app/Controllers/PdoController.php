@@ -19,6 +19,8 @@ $pdo = new PDO(
     )  // définition du jeu de caractères des échabges avec la BDD
 );
 
+$resultat;
+//Ici on insert une ligne de valeur :
 // $resultat = $pdo->exec("INSERT INTO `employes` 
 // (`prenom`, `nom`, `sexe`, `service`, `date_embauche`, `salaire`) 
 // VALUES ('daniel', 'Baugrand', 'm', 'informatique', '2016-02-08', 500)");
@@ -40,9 +42,41 @@ $maRequete = $pdo->query("SELECT `nom`, `prenom` FROM `employes`");
 $mesDonnees = $maRequete->fetchAll(PDO::FETCH_ASSOC);
 
 
+$nom = 'sennard';
+
+// Une requête préparée se réalise en 3 étapes :
+// Etape 1 : préparer le requête :
+$resultat = $pdo->prepare("SELECT * FROM employes WHERE nom = :nom");  // :nom est marqueur nominatif qui est en attente d'une valeur
 
 
+// Etape 2 : lier les marqueurs aux valeurs :
+// bindParam() reçoit exclusivement une VARIABLE vers laquelle pointe le marqueur (on ne peut pas y mettre une valeur directement).
+// Ainsi, si le contenu de la variable change, la valeur du marqueur changera automatiquement (pas besoin de refaire bindParam).
+$resultat->bindParam(':nom', $nom); 
 
+
+// Etape 3 : exécuter la requête :
+$resultat->execute();
+
+
+//ici j'ai le nom du client
+$nom = 'jack';
+
+// 1- prépare la requête :
+$resultat = $pdo->prepare("SELECT * FROM employes WHERE prenom = :nom");
+
+// 2- lier les marqueurs aux valeurs :
+// bindValue() reçoit une variable OU une valeur directement. 
+//Le marqueur point uniquement vers la valeur : si celle-ci change, 
+//il faudra refaire un bindValue lors d'un nouvel execute() pour tenir compte de cette nouvelle valeur 
+//(sinon le marqueur conserve l'ancienne valeur).
+$resultat->bindValue(':nom', $nom);  
+
+// 3- exécuter la requête :
+$resultat->execute();
+
+// Puis on affiche le résultat :
+$donnees = $resultat->fetch(PDO::FETCH_ASSOC);
 
 
 require_once (__DIR__ . "/../Views/pdo.view.php");
