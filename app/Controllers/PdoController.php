@@ -19,10 +19,30 @@ $pdo = new PDO(
     )  // définition du jeu de caractères des échabges avec la BDD
 );
 
-$resultat = $pdo->exec("INSERT INTO `employes` 
-(`prenom`, `nom`, `sexe`, `service`, `date_embauche`, `salaire`) 
-VALUES ('daniel', 'Baugrand', 'm', 'informatique', '2016-02-08', 500)");
+// $resultat = $pdo->exec("INSERT INTO `employes` 
+// (`prenom`, `nom`, `sexe`, `service`, `date_embauche`, `salaire`) 
+// VALUES ('daniel', 'Baugrand', 'm', 'informatique', '2016-02-08', 500)");
 
 $retour = "Nombre de lignes affectées par le INSERT : $resultat ";
+
+$result = $pdo->query("SELECT `nom`, `prenom` FROM employes WHERE prenom = 'daniel'");
+
+// la méthode fetch() avec le paramètre PDO::FETCH_ASSOC permet de transformer l'objet $result 
+//en un ARRAY associatif dont les indices correspondent aux noms des champs (*) de la requête SQL
+$employe = $result->fetch(PDO::FETCH_ASSOC);
+
+$maRequete = $pdo->query("SELECT `nom`, `prenom` FROM `employes`");
+
+//// retourne toutes les lignes de résultats dans un tableau multidimensionnel : 
+//on a 1 sous-array associatif à chaque indice numérique de $donnees. 
+//On peut mettre aussi FETCH_NUM pour des sous-arrays indicés numériquement, 
+//ou fetchAll() pour des sous-arrays numériques ET associatifs
+$mesDonnees = $maRequete->fetchAll(PDO::FETCH_ASSOC);
+
+
+
+
+
+
 
 require_once (__DIR__ . "/../Views/pdo.view.php");
