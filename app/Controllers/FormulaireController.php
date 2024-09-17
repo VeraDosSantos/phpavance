@@ -104,13 +104,4 @@ if(isset($_POST['nom'])){
     }
 }
 
-
-
-
-
-
-
-
-
-
 require_once (__DIR__ . "/../Views/formulaireInscription.view.php");
